@@ -25,10 +25,7 @@ var (
 		"markdown": markdownEscapeString,
 		"FilterLabel": func(label string, include_labels string) bool {
 			exist := strings.Contains(include_labels, label)
-			if exist {
-				return true
-			}
-			return false
+			return exist
 		},
 	}
 	isMarkdownSpecial [128]bool
