@@ -168,23 +168,6 @@ endif
 .PHONY: common-staticcheck
 common-staticcheck: lint
 
-.PHONY: common-unused
-common-unused: $(GOVENDOR)
-ifdef GOVENDOR
-	@echo ">> running check for unused packages"
-	@$(GOVENDOR) list +unused | grep . && exit 1 || echo 'No unused packages'
-else
-ifdef GO111MODULE
-	@echo ">> running check for unused/missing packages in go.mod"
-	GO111MODULE=$(GO111MODULE) $(GO) mod tidy
-ifeq (,$(wildcard vendor))
-	@git diff --exit-code -- go.sum go.mod
-else
-	@echo ">> running check for unused packages in vendor/"
-	GO111MODULE=$(GO111MODULE) $(GO) mod vendor
-endif
-endif
-endif
 
 .PHONY: common-build
 common-build: promu
