@@ -23,6 +23,10 @@ var (
 		"toUpper":  strings.ToUpper,
 		"toLower":  strings.ToLower,
 		"markdown": markdownEscapeString,
+		"FilterLabel": func(label string, include_labels string) bool {
+			exist := strings.Contains(include_labels, label)
+			return exist
+		},
 	}
 	isMarkdownSpecial [128]bool
 )
