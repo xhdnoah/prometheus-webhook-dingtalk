@@ -91,6 +91,8 @@ func (api *API) serveSend(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Bad Request", http.StatusBadRequest)
 		return
 	}
+	level.Info(logger).Log("msg", "build promMessage", "promMessage", promMessage)
+	level.Info(logger).Log("msg", "send notification", "notification", notification)
 
 	robotResp, err := notifier.SendNotification(notification, httpClient, &target)
 	if err != nil {
